@@ -1,0 +1,530 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&family=Open+Sans:wght@300;400;500;600&display=swap');
+
+* {
+    font-family: 'Inter', sans-serif;
+}
+
+main {
+    flex: 1; /* Permite que o main ocupe todo o espaço vertical restante dentro do content-wrapper */
+    padding: 20px; /* Padding interno para o conteúdo do main */
+    padding-top: 90px; /* Espaço para o cabeçalho fixo (se a altura do header for 80px) */
+    overflow-y: auto; /* Adiciona barra de rolagem se o conteúdo exceder a altura */
+    background-color: #1a1a1a; /* Cor de fundo escura do main, conforme suas imagens */
+    color: #e6e6e6; /* Cor padrão do texto no main */
+    font-family: 'Inter', sans-serif; /* Fonte para o dashboard */
+}
+
+h1 {
+    color: #ccc;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;    
+    flex-wrap: wrap;
+
+    margin-bottom: 25px;
+    padding: 15px;
+    background-color: #262626;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.top-bar form {
+    flex-grow: 0; /* Permite que o formulário ocupe o espaço disponível */
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+
+
+.top-bar select,
+.top-bar input[type="text"] {
+    padding: 8px 12px;
+    border: 1px solid #444;
+    border-radius: 5px;
+    font-size: 1rem;
+    min-width: 150px;
+    background-color: #262626;
+    color: #ccc;;
+}
+
+.btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.btn i {
+    margin-right: 5px;
+}
+
+.btn.yellow {
+    background-color: #ffc107;
+    color: #333;
+}
+.btn.yellow:hover {
+    background-color: #e0a800;
+}
+
+.btn.red {
+    background-color: #dc3545;
+    color: white;
+}
+.btn.red:hover {
+    background-color: #c82333;
+}
+
+.btn.green {
+    background-color: #28a745;
+    color: white;
+}
+.btn.green:hover {
+    background-color: #218838;
+}
+
+.btn.blue {
+    background-color: #007bff;
+    color: white;
+}
+.btn.blue:hover {
+    background-color: #0069d9;
+}
+
+.btn.purple {
+    background-color: #6f42c1;
+    color: white;
+}
+.btn.purple:hover {
+    background-color: #5a2e9e;
+}
+
+.btn.gray {
+    background-color: #6c757d;
+    color: white;
+}
+.btn.gray:hover {
+    background-color: #5a6268;
+}
+
+.container p {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.session-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #262626;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    border: 1px solid #333;
+    flex-wrap: wrap;
+}
+
+.session-header {
+    font-size: 18px;
+    font-weight: 500;
+    color: #e6e6e6;
+}
+
+.session-info {
+    margin-top: 4px;
+    color: #cfcfcf;
+    overflow-wrap: break-word;
+}
+
+.session-actions {
+    margin-top: 12px;
+    display: flex;
+    gap: 10px;
+}
+
+/* Responsividade */
+@media (max-width: 992px) {
+    .session-card {
+        width: calc(50% - 20px); /* 2 cards por linha */
+    }
+}
+
+@media (max-width: 768px) {
+    .top-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .top-bar form {
+        width: 100%;
+        flex-direction: column;
+        gap: 15px;
+    }
+    .top-bar select,
+    .top-bar input[type="text"] {
+        width: 100%;
+    }
+    .session-card {
+        width: 100%; /* 1 card por linha */
+    }
+}
+
+#sidebar.open-sidebar ~ main .top-bar .btn {
+    padding: 8px 10px; /* Diminui o preenchimento (tamanho do botão) */
+    font-size: 0.75rem; /* Diminui o tamanho da fonte */
+    gap: 5px; /* Reduz o espaço entre o ícone e o texto */
+}
+
+#sidebar.open-sidebar ~ main .top-bar .btn i {
+    margin-right: 2px; /* Reduz um pouco o espaço do ícone */
+}
+
+/* Opcional: Para ocultar o texto e mostrar apenas o ícone */
+/* Se o texto do seu botão estiver dentro de um <span>, por exemplo: */
+/* <button class="btn"><i class="fa-solid fa-plus"></i> <span>Adicionar Despesa</span></button> */
+#sidebar.open-sidebar ~ main .top-bar .btn span {
+    display: none; /* Oculta o texto */
+}
+
+/* Se quiser que o botão se adapte a uma largura menor, pode ser necessário um `flex-shrink` ou `max-width` */
+#sidebar.open-sidebar ~ main .top-bar .btn {
+    flex-shrink: 1; /* Permite que o botão encolha mais */
+    max-width: fit-content; /* Ou um valor fixo como 50px se quiser que ele vire só ícone */
+}   
+
+/* --- Estilos base para Modais --- */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 999; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #262626;
+    margin: 5% auto; /* 5% from the top and centered */
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%; /* Could be more or less, depending on screen size */
+    max-width: 500px;
+    color: #e6e6e6;
+    position: relative;
+    max-height: 70vh;
+    overflow-y: auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.6);
+}
+
+.modal-content h2 {
+    text-align: center;
+    padding-bottom: 16px;
+    font-size: 24px;
+    border-bottom: 1px solid #444;
+    margin-top: 0;
+}
+
+.close {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 16px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #fff;
+}
+
+.modal-content label {
+    display: block;
+    margin-top: 12px;
+    font-size: 14px;
+}
+
+.modal-content input,
+.modal-content select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 4px;
+    background-color: #1e1e1e;
+    color: #e6e6e6;
+    border: 1px solid #444;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px #1e1e1e inset !important;
+    box-shadow: 0 0 0px 1000px #1e1e1e inset !important;
+    -webkit-text-fill-color: #e6e6e6 !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Botões dentro dos modais */
+.modal-buttons .btn-submit { /* Renomeado para não conflitar com .btn */
+    background-color: #0ba18c;
+    color: #191919;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+
+.modal-buttons .btn-submit:hover {
+    background-color: #0e9d80;
+}
+
+.modal-buttons .btn-cancelar {
+    padding: 10px 40px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: background-color 0.2s;
+    font-weight: 500;
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.modal-buttons .btn-cancelar:hover {
+    background-color: #c82333;
+}
+
+textarea {
+    padding: 5px;
+    color: white;
+    width: 100%;
+    background-color: #1e1e1e;
+    min-height: 150px;
+}
+
+/* --- Estilos para o Modal de Gerenciamento de Categorias (#categoriasModal) --- */
+
+/* Garante que este modal use flexbox para centralização */
+#categoriasModal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000; /* Pode ajustar conforme necessário, se tiver outros modais */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7); /* Fundo escuro semi-transparente */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilo do conteúdo interno do modal de categorias */
+#categoriasModal .modal-content {
+    background-color: #262626; /* Fundo do modal */
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 550px; /* Largura máxima para telas maiores */
+    color: #e6e6e6; /* Cor padrão do texto */
+    position: relative;
+    max-height: 80vh; /* Altura máxima para permitir rolagem */
+    overflow-y: auto; /* Adiciona rolagem interna se o conteúdo exceder */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5); /* Sombra para profundidade */
+    animation: fadeIn 0.3s ease-out; /* Animação de entrada suave */
+}
+
+/* Título do modal de categorias */
+#categoriasModal .modal-content h2 {
+    text-align: center;
+    padding-bottom: 18px;
+    font-size: 26px;
+    border-bottom: 1px solid #444;
+    margin-top: 0;
+    margin-bottom: 25px;
+    color: #ccc;
+}
+
+/* Botão de fechar (o "X") dentro do modal de categorias */
+#categoriasModal .close-button {
+    color: #aaa;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+#categoriasModal .close-button:hover,
+#categoriasModal .close-button:focus {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Seção de formulário (input e botão de adicionar) */
+#categoriasModal .categoria-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* Input de texto para nova categoria */
+#categoriasModal .categoria-form input[type="text"] {
+    flex-grow: 1;
+    padding: 12px;
+    background-color: #1a1a1a;
+    color: #e6e6e6;
+    border: 1px solid #444;
+    border-radius: 6px;
+    font-size: 1rem;
+    outline: none;
+}
+
+#categoriasModal .categoria-form input[type="text"]::placeholder {
+    color: #888;
+}
+
+#categoriasModal .categoria-form input[type="text"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+/* Botão "Adicionar Categoria" */
+#categoriasModal .categoria-form .btn {
+    padding: 12px 18px;
+    font-size: 0.95rem;
+}
+
+/* Título da lista de categorias */
+#categoriasModal .categoria-lista h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #ccc;
+    font-size: 1.2rem;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+}
+
+/* Lista de categorias (UL) */
+#categoriasModal #lista_categorias {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 250px;
+    overflow-y: auto;
+    border: 1px solid #333;
+    border-radius: 8px;
+    background-color: #1e1e1e;
+}
+
+/* Cada item da lista de categorias (LI) */
+#categoriasModal #lista_categorias li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    border-bottom: 1px solid #333;
+    color: #e6e6e6;
+    font-size: 1rem;
+    transition: background-color 0.2s ease;
+}
+
+#categoriasModal #lista_categorias li:last-child {
+    border-bottom: none; /* Remove borda do último item */
+}
+
+#categoriasModal #lista_categorias li:hover {
+    background-color: #2e2e2e;
+}
+
+/* Contêiner dos botões de ação (editar/excluir) dentro de cada item */
+#categoriasModal .categoria-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* Botões de editar/excluir */
+#categoriasModal .categoria-actions .btn {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+}
+
+/* Seção de botões na parte inferior do modal (o botão "Fechar") */
+#categoriasModal .modal-buttons {
+    display: flex;
+    justify-content: flex-end; /* Alinha à direita */
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid #333;
+}
+
+/* Botão "Fechar" */
+#categoriasModal .modal-buttons .btn {
+    padding: 12px 25px;
+    font-size: 1rem;
+}
+
+/* Ajustes para o autofill do navegador (para inputs específicos deste modal) */
+#categoriasModal input:-webkit-autofill,
+#categoriasModal input:-webkit-autofill:hover,
+#categoriasModal input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px #1a1a1a inset !important;
+    box-shadow: 0 0 0px 1000px #1a1a1a inset !important;
+    -webkit-text-fill-color: #e6e6e6 !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Responsividade específica para o modal de categorias */
+@media (max-width: 600px) {
+    #categoriasModal .modal-content {
+        width: 95%;
+        padding: 20px;
+    }
+    #categoriasModal .modal-content h2 {
+        font-size: 22px;
+    }
+    #categoriasModal .categoria-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    #categoriasModal .categoria-form input[type="text"],
+    #categoriasModal .categoria-form .btn {
+        width: 100%;
+    }
+}
